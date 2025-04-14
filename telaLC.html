@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/telaLC.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous" defer></script>
+
+    <title>login</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="signin-signup">
+            <form action="" class="sign-in-form">
+                <h2 class="title">Login <img class="lg" src="icon/pizza (2).png" alt=""></h2>
+                <div class="inputfield">
+                    <img class="icon" src="icon/email (2).png" alt="">
+                    <input type="text" placeholder="E-mail" id="email" required>
+                </div>
+                <div class="inputfield">
+                    <img class="icon" src="icon/escudo.png" alt="">
+                    <input type="password" placeholder="Senha" id="senha" required>
+                </div>
+                <p>Esqueceu a senha? <a href="#" class="acessa">Acesse aqui</a></p>
+                <input type="submit" value="Entrar" class="btn" id="butLogar">
+                <p class="social-text">Continue com:</p>
+                <div class="social-media">
+                    <a href="#" class="social-icon">
+                        <img class="img img_borda" src="icon/facebook-app-symbol.png" alt="">
+                    </a>
+                    <a href="" class="social-icon">
+                        <img class="img img_borda" src="icon/google.png" alt="">
+                    </a>
+                    <a href="" class="social-icon">
+                        <img class="img img_borda" src="icon/apple-logo.png" alt="">
+                    </a>
+                </div>
+                <p class="account-text">Não possui conta? <a href="#" id="sign-up-btn2">Cadastre-se</a></p>
+            </form>
+            <form action="" class="sign-up-form">
+                <h2 class="title">Cadastre-se <img class="lg" src="icon/pizza (2).png" alt=""></h2>
+                <div class="inputfield">
+                    <img class="icon" src="icon/perfil.png" alt="">
+                    <input type="text" placeholder="Nome" id="nome" required>
+                </div>
+                <div class="inputfield">
+                    <img class="icon" src="icon/email (2).png" alt="">
+                    <input type="text" placeholder="E-mail" id="user" required>
+                </div>
+                <div class="inputfield">
+                    <img class="icon" src="icon/phone-call.png" alt="">
+                    <input type="tel" placeholder="Telefone" id="telefone" required>
+                </div>
+                <div class="inputfield">
+                    <img class="icon" src="icon/escudo (1).png" alt="">
+                    <input type="password" placeholder="Senha" id="password" required>
+                </div>
+                <div class="inputfield">
+                    <img class="icon" src="icon/escudo.png" alt="">
+                    <input type="confpassword" placeholder="Confirmar senha" required>
+                </div>
+                <input type="submit" value="Cadastrar" class="btn" id="btnCadastrar">
+                <p class="social-text">Cadastre-se com:</p>
+                <div class="social-media">
+                    <a href="#" class="social-icon">
+                        <img class="img img_borda" src="icon/facebook-app-symbol.png" alt="">
+                    </a>
+                    <a href="" class="social-icon">
+                        <img class="img img_borda" src="icon/google.png" alt="">
+                    </a>
+                    <a href="" class="social-icon">
+                        <img class="img img_borda" src="icon/apple-logo.png" alt="">
+                    </a>
+                </div>
+                <p class="account-text">Já possui conta? <a href="#" id="sign-in-btn2">Entrar</a></p>
+            </form>
+        </div>
+        <div class="panels-container">
+            <div class="panel left-panel">
+                <div class="content">
+                    <h3>Já possui conta?</h3>
+                    <p>A solução para sua fome está aqui!</p>
+                    <a href="index.html"><button class="btn-primary" id="sign-in-btn">Entrar</button></a>
+                </div>
+                <img src="img/img1.png" alt="" class="image">
+            </div>
+            <div class="panel right-panel">
+                <div class="content">
+                    <h3>Não possui conta?</h3>
+                    <p>Só mais um pouco e sua fome será história!</p>
+                    <a href="index.html"><button class="btn-second" id="sign-up-btn">Cadastre-se</button></a>
+                </div>
+                <img src="img/img2.png" alt="" class="image">
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    const sign_in_btn = document.querySelector("#sign-in-btn");
+    const sign_up_btn = document.querySelector("#sign-up-btn");
+    const container = document.querySelector(".container");
+    const sign_in_btn2 = document.querySelector("#sign-in-btn2");
+    const sign_up_btn2 = document.querySelector("#sign-up-btn2");
+
+    sign_up_btn.addEventListener("click", () => {
+        container.classList.add("sign-up-mode");
+    });
+
+    sign_in_btn.addEventListener("click", () => {
+        container.classList.remove("sign-up-mode");
+    });
+
+    sign_up_btn2.addEventListener("click", () => {
+        container.classList.add("sign-up-mode2");
+    });
+
+    sign_in_btn2.addEventListener("click", () => {
+        container.classList.remove("sign-up-mode2");
+    });
+</script>
+
+</html>

@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Carrinho - Aline's Pizzaria</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        /* Header */
+        .header {
+            width: 100%;
+            max-width: 1200px;
+            height: 80px;
+            background-color: #266C59;
+            display: flex;
+            margin: 20px auto;
+            padding: 15px;
+            border-radius: 10px;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .cart {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            border-radius: 30px;
+            padding: 8px 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .cart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .fa-shopping-cart {
+            color: #266C59;
+            font-size: 20px;
+            margin-right: 10px;
+        }
+
+        .cart p {
+            width: 25px;
+            height: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background-color: #CEAD4E;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        /* Container Principal */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto 30px;
+            padding: 0 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Linha de Produtos */
+        .linha-produtos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .corpoProduto {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .corpoProduto:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .imgProduto {
+            width: 100%;
+            height: 180px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .produtoMiniatura {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .titulo {
+            width: 100%;
+            text-align: center;
+        }
+
+        .titulo p {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .titulo h2 {
+            font-size: 22px;
+            color: #CEAD4E;
+            margin-bottom: 15px;
+        }
+
+        .button {
+            background-color: #266C59;
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .button:hover {
+            background-color: #1E5545;
+        }
+
+        /* Barra Lateral - Carrinho */
+        .barraLateral {
+            width: 100%;
+            border-radius: 10px;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-top: 20px;
+        }
+
+        .topoCarrinho {
+            background-color: #266C59;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 50px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        #carrinho-itens {
+            min-height: 100px;
+        }
+
+        .item-carrinho {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid #CEAD4E;
+        }
+
+        .linha-da-imagem {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid #266C59;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .img-carrinho {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .item-carrinho-info {
+            flex: 1;
+            margin: 0 15px;
+        }
+
+        .item-carrinho-info h4 {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .item-carrinho-info p {
+            font-size: 14px;
+            color: #CEAD4E;
+            font-weight: 600;
+        }
+
+        .fa-trash {
+            color: #e74c3c;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+
+        .fa-trash:hover {
+            transform: scale(1.1);
+        }
+
+        .item-carrinho-vazio {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .rodape {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            padding: 15px 0;
+            border-top: 1px solid #ddd;
+        }
+
+        .rodape h3 {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .rodape h2 {
+            font-size: 22px;
+            color: #CEAD4E;
+        }
+
+        #finalizar-compra {
+            width: 100%;
+            background-color: #CEAD4E;
+            border: none;
+            border-radius: 8px;
+            padding: 15px;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        #finalizar-compra:hover {
+            background-color: #B89A43;
+        }
+
+        /* Responsividade */
+        @media (min-width: 768px) {
+            .container {
+                flex-direction: row;
+                gap: 20px;
+            }
+
+            .linha-produtos {
+                width: 60%;
+                margin-bottom: 0;
+            }
+
+            .barraLateral {
+                width: 40%;
+                margin-top: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                height: 70px;
+                padding: 10px;
+                margin: 15px auto;
+            }
+
+            .header .logo {
+                font-size: 20px;
+            }
+
+            .cart {
+                padding: 6px 12px;
+            }
+
+            .titulo h2 {
+                font-size: 20px;
+            }
+
+            .button {
+                padding: 10px;
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <p class="logo">Aline's Pizzaria</p>
+        <div class="cart">
+            <i class="fas fa-shopping-cart"></i>
+            <p id="cart-count">0</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="linha-produtos">
+            <!-- Produto 1 -->
+            <form action="filtros/criar.php" method="post">
+                <div class="corpoProduto">
+                    <div class="imgProduto">
+                        <img src="img/pizza11.jpg" alt="Pizza Peperoni" class="produtoMiniatura" />
+                    </div>
+                    <div class="titulo">
+                        <p>Pizza Peperoni</p>
+                        <h2>R$ 49,90</h2>
+                        <input type="hidden" name="id_produto" value="1">
+                        <input type="hidden" name="valor" value="49.90">
+                        <button type="submit" class="button" name="addCarrinho">Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Produto 2 -->
+            <form action="filtros/criar.php" method="post">
+                <div class="corpoProduto">
+                    <div class="imgProduto">
+                        <img src="img/pizza22.jpg" alt="Pizza Marguerita" class="produtoMiniatura" />
+                    </div>
+                    <div class="titulo">
+                        <p>Pizza Marguerita</p>
+                        <h2>R$ 59,90</h2>
+                        <input type="hidden" name="id_produto" value="2">
+                        <input type="hidden" name="valor" value="59.90">
+                        <button type="submit" class="button" name="addCarrinho">Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Produto 3 -->
+            <form action="filtros/criar.php" method="post">
+                <div class="corpoProduto">
+                    <div class="imgProduto">
+                        <img src="img/pizza33.webp" alt="Pizza Calabresa" class="produtoMiniatura" />
+                    </div>
+                    <div class="titulo">
+                        <p>Pizza Calabresa</p>
+                        <h2>R$ 54,90</h2>
+                        <input type="hidden" name="id_produto" value="3">
+                        <input type="hidden" name="valor" value="54.90">
+                        <button type="submit" class="button" name="addCarrinho">Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Produto 4 -->
+            <form action="filtros/criar.php" method="post">
+                <div class="corpoProduto">
+                    <div class="imgProduto">
+                        <img src="img/pizza44.jpg" alt="Pizza Portuguesa" class="produtoMiniatura" />
+                    </div>
+                    <div class="titulo">
+                        <p>Pizza Portuguesa</p>
+                        <h2>R$ 59,90</h2>
+                        <input type="hidden" name="id_produto" value="4">
+                        <input type="hidden" name="valor" value="59.90">
+                        <button type="submit" class="button" name="addCarrinho">Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="barraLateral">
+            <div class="topoCarrinho">
+                <p>Meu Carrinho</p>
+            </div>
+            <div id="carrinho-itens">
+            </div>
+            <div class="item-carrinho-vazio" id="carrinho-vazio">Seu carrinho está vazio!</div>
+            <div class="rodape">
+                <h3>Total</h3>
+                <h2 id="total-preco">R$ 0,00</h2>
+            </div>
+            <button id="finalizar-compra" class="button" onclick="finalizarCompra()" style="display:none;">Finalizar Compra</button>
+        </div>
+    </div>
+
+    <script>
+        // Carrinho de compras
+        let cart = [];
+        const cartCount = document.getElementById('cart-count');
+        const cartItems = document.getElementById('carrinho-itens');
+        const emptyCart = document.getElementById('carrinho-vazio');
+        const totalPrice = document.getElementById('total-preco');
+        const checkoutBtn = document.getElementById('finalizar-compra');
+
+        // Adicionar produto ao carrinho
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(this);
+                const productId = formData.get('id_produto');
+                const productPrice = parseFloat(formData.get('valor'));
+                const productName = this.querySelector('p').textContent;
+                const productImg = this.querySelector('img').src;
+                
+                addToCart(productId, productName, productPrice, productImg);
+            });
+        });
+
+        function addToCart(id, name, price, img) {
+            // Verifica se o produto já está no carrinho
+            const existingItem = cart.find(item => item.id === id);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id,
+                    name,
+                    price,
+                    img,
+                    quantity: 1
+                });
+            }
+            
+            updateCart();
+        }
+
+        function updateCart() {
+            // Atualiza contador do carrinho
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+            
+            // Atualiza lista de itens
+            cartItems.innerHTML = '';
+            
+            if (cart.length === 0) {
+                emptyCart.style.display = 'block';
+                checkoutBtn.style.display = 'none';
+            } else {
+                emptyCart.style.display = 'none';
+                checkoutBtn.style.display = 'block';
+                
+                cart.forEach(item => {
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'item-carrinho';
+                    cartItem.innerHTML = `
+                        <div class="linha-da-imagem">
+                            <img src="${item.img}" class="img-carrinho" alt="${item.name}">
+                        </div>
+                        <div class="item-carrinho-info">
+                            <h4>${item.name}</h4>
+                            <p>R$ ${item.price.toFixed(2)} x ${item.quantity}</p>
+                        </div>
+                        <i class="fas fa-trash" onclick="removeFromCart('${item.id}')"></i>
+                    `;
+                    cartItems.appendChild(cartItem);
+                });
+            }
+            
+            // Atualiza total
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            totalPrice.textContent = `R$ ${total.toFixed(2)}`;
+        }
+
+        function removeFromCart(id) {
+            const itemIndex = cart.findIndex(item => item.id === id);
+            
+            if (itemIndex !== -1) {
+                if (cart[itemIndex].quantity > 1) {
+                    cart[itemIndex].quantity -= 1;
+                } else {
+                    cart.splice(itemIndex, 1);
+                }
+                
+                updateCart();
+            }
+        }
+
+        function finalizarCompra() {
+            if (cart.length === 0) {
+                alert('Seu carrinho está vazio!');
+                return;
+            }
+            
+            alert('Compra finalizada com sucesso! Obrigado por escolher a Aline\'s Pizzaria!');
+            cart = [];
+            updateCart();
+        }
+    </script>
+</body>
+</html>

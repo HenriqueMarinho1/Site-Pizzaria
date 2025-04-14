@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <!-- Meta tags obrigatórias -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Leaflet CSS (para o mapa) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+     
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="css/sobre.css">
+    
+    <title>Restaurante - Aline's Pizzaria</title>
+</head>
+
+<body>
+    <!-- Navbar Bootstrap -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
+            <div class="container">
+                <!-- Logo -->
+                <a class="navbar-brand fw-bold fs-3" href="#">
+                    <span class="text-success">Aline's</span> <span class="text-dark">Pizzaria</span>
+                </a>
+                
+                <!-- Botão hamburguer -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <!-- Itens do menu -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-lg-center">
+                        <li class="nav-item mx-2">
+                            <a class="nav-link" href="index.html">Inicio</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link active fw-semibold" href="telaS.html">Sobre</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link" href="telaPedido.html">Cardápio</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="btn btn-outline-success px-3 py-2" href="telaLC.html">Entrar</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <main class="mt-5 pt-4"> <!-- Margem top para compensar navbar fixa -->
+        <!-- Seção principal -->
+        <section class="container py-5">
+            <div class="row justify-content-center align-items-center g-4">
+                <!-- Coluna de texto -->
+                <div class="col-lg-6 text-center text-lg-start">
+                    <h1 class="display-5 fw-bold text-success mb-4">Junte-se a nós na Aline's Pizzaria</h1>
+                    <h4 class="fs-4 text-dark mb-4">Um pouco da nossa casa</h4>
+                    <p class="mb-4">Venha para a Aline's Pizzaria e descubra um ambiente acolhedor, perfeito para todos os momentos! Nossas pizzas, feitas com ingredientes frescos e massa artesanal, vão surpreender seu paladar. Com uma decoração charmosa e música ambiente, é o lugar ideal para um jantar com amigos ou em família. Não esqueça de registrar os pratos deliciosos nos stories! Estamos te esperando para criar momentos inesquecíveis!</p>
+                    <p class="mb-1"><i class="fas fa-map-marker-alt text-success me-2"></i>Rua Salvador Branco de Andrade, 182 - Jardim Sao Miguel, Taboão da Serra - SP</p>
+                    <p class="mb-1"><i class="fas fa-envelope text-success me-2"></i>06760-100</p>
+                    <p><i class="fas fa-clock text-success me-2"></i>Horário: 17h00 às 23h00</p>
+                </div>
+                
+                <!-- Coluna do mapa -->
+                <div class="col-lg-6">
+                    <div id="map" class="rounded-3 shadow" style="height: 400px;"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-success text-white position-relative mt-5">
+            <img src="wave.svg" alt="Onda decorativa" class="w-100 position-absolute top-0 start-0">
+            <div class="container py-5 position-relative">
+                <div class="text-center py-4">
+                    <span class="small">&copy; 2024 Aline's Pizzaria</span>
+                </div>
+            </div>
+        </footer>        
+    </main>
+
+    <!-- Bootstrap Bundle com Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
+     
+    <script>
+        // Mapa (mantido igual pois não usa Bootstrap)
+        document.addEventListener('DOMContentLoaded', function() {
+            const restaurantLocation = [-23.6227, -46.7994];
+            const map = L.map('map').setView(restaurantLocation, 15);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            L.marker(restaurantLocation).addTo(map)
+                .bindPopup('Aline\'s Pizzaria<br>Rua Salvador Branco de Andrade, 182')
+                .openPopup();
+        });
+    </script>
+</body>
+</html>

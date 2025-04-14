@@ -1,0 +1,272 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    list-style: none;
+    text-decoration: none;
+}
+
+body {
+    color: black;
+    background-color: white;
+    overflow-x: hidden; 
+}
+
+/* Header e Navegação */
+.navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 40px;
+    box-shadow: 0 0.1rem 0.5rem #ccc;
+    width: 100%;
+    background-color: white;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    transition: all 0.5s;
+}
+
+.navbar-brand span.text-success {
+    color: #266C59 !important; 
+}
+
+.nav-link:hover {
+    color: #266C59 !important;
+}
+
+.btn-primary {
+    padding: 9px 15px;
+    font-size: 14px;
+    background: white;
+    color: #266C59;
+    border-radius: 10px;
+    font-weight: 500;
+    transition: all 0.5s;
+    border: 1px solid #266C59;
+}
+
+.btn-primary:hover {
+    background: #266C59;
+    color: white;
+}
+
+.navigation .logo {
+    color: #266C59;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.logo span {
+    color: black;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+}
+
+.nav-menu li a {
+    color: black;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.5s;
+}
+
+.nav-menu li a:hover {
+    color: #266C59;
+}
+
+/* Menu Hamburguer */
+.menu {
+    cursor: pointer;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 21px;
+}
+
+.menu .bar {
+    display: block;
+    width: 100%;
+    height: 3px;
+    border-radius: 3px;
+    background: black;
+    transition: all 0.3s;
+}
+
+.menu .bar:nth-child(1),
+.menu .bar:nth-child(3) {
+    background: #266C59;
+}
+
+.menu.ativo .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.menu.ativo .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.menu.ativo .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Conteúdo Principal */
+main {
+    margin-top: 77px;
+    min-height: calc(100vh - 77px);
+}
+
+.home {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    gap: 2rem;
+}
+
+.home-text {
+    max-width: 800px;
+    text-align: center;
+    padding: 1rem;
+}
+
+.home-text h1 {
+    font-size: 2.5rem;
+    color: #266C59;
+    margin-bottom: 1rem;
+}
+
+.home-text .text-h4 {
+    font-size: 1.5rem;
+    color: black;
+    margin-bottom: 1rem;
+}
+
+.home-text p {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Mapa */
+#map {
+    width: 100%;
+    min-height: 400px;
+    max-width: 800px;
+    height: 400px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    margin: 1rem 0;
+}
+
+/* Footer */
+footer {
+    width: 100%;
+    background-color: #266C59;
+    color: white;
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: 2rem;
+    position: relative;
+}
+
+footer img {
+    width: 100%;
+    position: absolute;
+    top: -2px;
+    left: 0;
+    transform: translateY(-1px);
+}
+
+#footer_items {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+
+#copyright {
+    font-size: 0.9rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+
+    main {
+        padding-top: 1rem;
+    }
+
+    .navigation {
+        padding: 15px 20px;
+    }
+
+    .menu {
+        display: flex;
+    }
+
+    .nav-menu {
+        position: fixed;
+        right: -100%;
+        top: 70px;
+        width: 80%;
+        height: calc(100vh - 70px);
+        flex-direction: column;
+        background: white;
+        gap: 1rem;
+        padding: 2rem;
+        transition: 0.5s;
+        box-shadow: -5px 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-menu.ativo {
+        right: 0;
+    }
+
+    .nav-item {
+        margin: 1rem 0;
+        text-align: center;
+    }
+
+    .home-text h1 {
+        font-size: 2rem;
+    }
+
+    .home-text .text-h4 {
+        font-size: 1.3rem;
+    }
+    .text-lg-start {
+        text-align: center !important;
+    }
+    .display-5 {
+        font-size: 2rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .navigation .logo {
+        font-size: 1.2rem;
+    }
+
+    .home-text h1 {
+        font-size: 1.8rem;
+    }
+
+    .home-text .text-h4 {
+        font-size: 1.1rem;
+    }
+
+    .home-text p {
+        font-size: 0.9rem;
+    }
+
+    #map {
+        height: 300px;
+    }
+}

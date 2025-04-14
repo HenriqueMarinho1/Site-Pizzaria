@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aline's Pizzaria</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #266C59;
+            --secondary-color: #CEAD4E;
+            --light-color: #f9f9f9;
+            --dark-color: #333;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark-color);
+            background-color: #fff;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #fff;
+            box-shadow: 0 0.1rem 0.5rem #ccc;
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1030;
+        }
+
+        .navbar-brand {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .navbar-brand span:first-child {
+            color: var(--primary-color);
+        }
+
+        .navbar-brand span:last-child {
+            color: var(--dark-color);
+        }
+
+        .nav-link {
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .btn-primary-custom {
+            background-color: #fff;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 8px 20px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .btn-primary-custom:hover {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding-top: 100px;
+            padding-bottom: 80px;
+        }
+
+        .hero-content h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .hero-btn {
+            background-color: var(--secondary-color);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 30px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .hero-btn:hover {
+            background-color: #fff;
+            color: var(--secondary-color);
+            border: 1px solid var(--secondary-color);
+        }
+
+        /* Menu Section */
+        .menu-section {
+            padding: 80px 0;
+            background-color: var(--light-color);
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            color: #666;
+            margin-bottom: 3rem;
+        }
+
+        .dish-card {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            height: 100%;
+            margin-bottom: 30px;
+        }
+
+        .dish-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .dish-img-container {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--light-color);
+            padding: 20px;
+        }
+
+        .dish-img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
+        .dish-body {
+            padding: 20px;
+        }
+
+        .dish-title {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .dish-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .dish-rating {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .dish-price {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .heart-icon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            padding: 80px 0;
+        }
+
+        .chef-img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-card {
+            background-color: var(--light-color);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .testimonial-author {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .testimonial-rating {
+            color: var(--secondary-color);
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 60px 0 20px;
+            position: relative;
+        }
+
+        .wave-img {
+            position: absolute;
+            top: -2px;
+            left: 0;
+            width: 100%;
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-img {
+                margin-top: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content h4 {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-section {
+                padding-top: 80px;
+                padding-bottom: 60px;
+            }
+
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-btn {
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container"> <!-- Container para alinhar conteúdo -->
+            <a class="navbar-brand" href="#">
+                A<span>line's</span> P<span>izzaria</span>
+            </a>
+
+            <!-- Botão toggle para menu mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span> <!-- Ícone de hamburguer -->
+            </button>
+
+            <!-- Itens do menu -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto"> <!-- ms-auto alinha à direita -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="telaS.html">Sobre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="telaPedido.html">Cardápio</a>
+                    </li>
+                    <li class="nav-item ms-lg-3"> <!-- Margem apenas em telas grandes -->
+                        <a class="btn btn-primary-custom" href="telaLC.html">Entrar</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Seção Hero -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center"> <!-- Alinha verticalmente -->
+                <!-- Coluna de texto -->
+                <div class="col-lg-6">
+                    <div class="hero-content">
+                        <h4>Conheça a Aline's Pizzaria</h4>
+                        <h1>Saboreando fatias, unindo corações!</h1>
+                        <p>Descubra um mundo de sabores na Aline's Pizzaria e Sabores! Cada fatia é uma celebração,
+                            perfeita para compartilhar momentos especiais. Transforme suas refeições em experiências
+                            inesquecíveis e mostre aos amigos nos stories!</p>
+                        <a href="telaLC.html" class="btn hero-btn">Entre aqui</a>
+                    </div>
+                </div>
+                <!-- Coluna de imagem -->
+                <div class="col-lg-6">
+                    <img src="img/img.png" alt="Pizza deliciosa" class="img-fluid hero-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Cardápio -->
+    <section class="menu-section">
+        <div class="container">
+            <!-- Cabeçalho da seção -->
+            <div class="text-center mb-5"> <!-- text-center centraliza, mb-5 margem inferior -->
+                <h2 class="section-title">Cardápio</h2>
+                <p class="section-subtitle">Um pouco das nossas pizzas</p>
+            </div>
+            <!-- Grid de produtos -->
+            <div class="row">
+                <!-- Card de produto (4 por linha em lg, 2 por linha em md) -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="dish-card position-relative"> <!-- position-relative para ícone absoluto -->
+                        <i class="fas fa-heart heart-icon"></i> <!-- Ícone de favorito -->
+                        <div class="dish-img-container">
+                            <img src="img/p1.png" class="dish-img" alt="Pizza Peperone">
+                        </div>
+                        <div class="dish-body">
+                            <h3 class="dish-title">Peperone</h3>
+                            <p class="dish-description">
+                                Massa fina e crocante, coberta com molho de tomate fresco, fatias de mozzarella,
+                                manjericão fresco e um toque de azeite. Clássica e deliciosa!
+                            </p>
+                            <div class="dish-rating">
+                                <i class="fas fa-star"></i> <!-- Ícone de estrela -->
+                                <i class="fas fa-star"></i> <!-- Ícone de estrela -->
+                                <i class="fas fa-star"></i> <!-- Ícone de estrela -->
+                                <i class="fas fa-star"></i> <!-- Ícone de estrela -->
+                                <i class="fas fa-star"></i> <!-- Ícone de estrela -->
+                                <span class="text-muted ms-1">(400+)</span> <!-- text-muted cor suave, ms-1 margem -->
+                            </div>
+                            <h4 class="dish-price">R$90,00</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pizza 2 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="dish-card position-relative"> <!-- position-relative para ícone absoluto -->
+                        <i class="fas fa-heart heart-icon"></i> <!-- Ícone de favorito -->
+                        <div class="dish-img-container">
+                            <img src="img/p2.png" class="dish-img" alt="Pizza Mushroom">
+                        </div>
+                        <div class="dish-body">
+                            <h3 class="dish-title">Mushroom</h3>
+                            <p class="dish-description">
+                                Massa leve e crocante, generosamente coberta com molho de tomate, queijo derretido e uma
+                                mistura de cogumelos frescos. Saborosa e reconfortante!
+                            </p>
+                            <div class="dish-rating">
+                                <i class="fas fa-star"></i> <!-- Ícone de estrela -->
+                                <i class="fas fa-star"></i> <!-- Ícone de estrela -->
+                                <i class="fas fa-star"></i> <!-- Ícone de estrela -->
+                                <i class="fas fa-star"></i> <!-- Ícone de estrela -->
+                                <i class="fas fa-star"></i> <!-- Ícone de estrela -->
+                                <span class="text-muted ms-1">(400+)</span> <!-- text-muted cor suave, ms-1 margem -->
+                            </div>
+                            <h4 class="dish-price">R$120,00</h4>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Pizza 3 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="dish-card position-relative"> <!-- position-relative para ícone absoluto -->
+                        <i class="fas fa-heart heart-icon"></i> <!-- Ícone de favorito -->
+                        <div class="dish-img-container">
+                            <img src="img/p3.png" class="dish-img" alt="Pizza Mediterrâneo">
+                        </div>
+                        <div class="dish-body">
+                            <h3 class="dish-title">Mediterrâneo</h3>
+                            <p class="dish-description">
+                                Base crocante com molho de tomate, queijo, azeitonas, cebola caramelizada, ovo cozido e
+                                bacon crocante, finalizada com folhas frescas. Irresistível!
+                            </p>
+                            <div class="dish-rating">
+                                <i class="fas fa-star"></i> <!-- Ícone de estrela -->
+                                <i class="fas fa-star"></i> <!-- Ícone de estrela -->
+                                <i class="fas fa-star"></i> <!-- Ícone de estrela -->
+                                <i class="fas fa-star"></i> <!-- Ícone de estrela -->
+                                <i class="fas fa-star"></i> <!-- Ícone de estrela -->
+                                <span class="text-muted ms-1">(400+)</span> <!-- text-muted cor suave, ms-1 margem -->
+                            </div>
+                            <h4 class="dish-price">R$70,00</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pizza 4 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="dish-card position-relative"> <!-- position-relative para ícone absoluto -->
+                        <i class="fas fa-heart heart-icon"></i> <!-- Ícone de favorito -->
+                        <div class="dish-img-container">
+                            <img src="img/p4.png" class="dish-img" alt="Pizza Marguerita">
+                        </div>
+                        <div class="dish-body">
+                            <h3 class="dish-title">Marguerita</h3>
+                            <p class="dish-description">
+                                Massa fina e crocante, coberta com molho de tomate fresco, fatias de mozzarella,
+                                manjericão fresco e um toque de azeite. Clássica e deliciosa!
+                            </p>
+                            <div class="dish-rating">
+                                <i class="fas fa-star"></i> <!-- Ícone de estrela -->
+                                <i class="fas fa-star"></i> <!-- Ícone de estrela -->
+                                <i class="fas fa-star"></i> <!-- Ícone de estrela -->
+                                <i class="fas fa-star"></i> <!-- Ícone de estrela -->
+                                <i class="fas fa-star"></i> <!-- Ícone de estrela -->
+                                <span class="text-muted ms-1">(400+)</span> <!-- text-muted cor suave, ms-1 margem -->
+                            </div>
+                            <h4 class="dish-price">R$120,00</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Seção de Depoimentos -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="row">
+                <!-- Coluna da imagem (visível apenas em lg) -->
+                <div class="col-lg-5 d-none d-lg-block">
+                    <img src="img/cf.png" class="chef-img" alt="Chef da pizzaria">
+                </div>
+                <!-- Coluna dos depoimentos -->
+                <div class="col-lg-7">
+                    <div class="mb-5"> <!-- Margem inferior grande -->
+                        <h2 class="section-title">Avaliações</h2>
+                        <p class="section-subtitle">A opinião dos nossos clientes</p>
+                    </div>  
+
+                    <div class="row">
+                        <!-- Card de depoimento -->
+                        <div class="col-md-6">
+                            <div class="testimonial-card d-flex"> <!-- d-flex para alinhamento flexível -->
+                                <img src="img/m11.png" class="testimonial-avatar" alt="Cliente">
+                                <div>
+                                    <p class="testimonial-author mb-1"> <!-- mb-1 margem pequena inferior -->
+                                        Andrey Alves 
+                                        <span class="testimonial-rating">
+                                            <i class="fas fa-star"></i> <!-- Ícone de estrela -->
+                                            <i class="fas fa-star"></i> <!-- Ícone de estrela -->
+                                            <i class="fas fa-star"></i> <!-- Ícone de estrela -->
+                                            <i class="fas fa-star"></i> <!-- Ícone de estrela -->
+                                            <i class="fas fa-star"></i> <!-- Ícone de estrela -->
+                                        </span>
+
+                                    
+                                    <p class="mb-0">
+                                        "Melhor pizzaria da região! A combinação de ingredientes é de dar água na boca,
+                                        e a massa é deliciosa. O ambiente é perfeito para um jantar em família. Estou
+                                        ansioso para voltar!"
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Testimonial 2 -->
+                        <div class="col-md-6">
+                            <div class="testimonial-card d-flex">
+                                <img src="img/m22.png" class="testimonial-avatar" alt="Cliente Guilherme Ribeiro">
+                                <div>
+                                    <p class="testimonial-author mb-1">
+                                        Guilherme Ribeiro <span class="testimonial-rating"><i class="fas fa-star"></i><i
+                                                class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                                class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                                    </p>
+                                    <p class="mb-0">
+                                        "Simplesmente adorei! A variedade de sabores é impressionante, e cada fatia é
+                                        uma explosão de sabor. O atendimento é muito atencioso e a entrega foi rápida.
+                                        Recomendo!"
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Testimonial 3 -->
+                        <div class="col-md-6">
+                            <div class="testimonial-card d-flex">
+                                <img src="img/m.png" class="testimonial-avatar" alt="Cliente Raquel Ferreira">
+                                <div>
+                                    <p class="testimonial-author mb-1">
+                                        Raquel Ferreira <span class="testimonial-rating"><i class="fas fa-star"></i><i
+                                                class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                                class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                                    </p>
+                                    <p class="mb-0">
+                                        "Uma experiência incrível! A pizza estava perfeita, com uma massa crocante e
+                                        ingredientes frescos. O atendimento foi excelente e o ambiente acolhedor.
+                                        Voltarei com certeza!"
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <img src="wave.svg" class="wave-img" alt="Onda decorativa">
+        <div class="container">
+            <div class="text-center">
+                <p class="copyright">&copy 2024 Aline's Pizzaria</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Toggle heart icon color
+        document.querySelectorAll('.heart-icon').forEach(icon => {
+            icon.addEventListener('click', function () {
+                this.classList.toggle('text-danger');
+            });
+        });
+    </script>
+</body>
+
+</html>
